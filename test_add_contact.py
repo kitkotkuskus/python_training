@@ -3,38 +3,45 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
-from group_contact import Group_contact
+from group_contact import *
 
 class TestAddContact(unittest.TestCase):
     def setUp(self):
         self.wd = webdriver.Firefox()
         self.wd.implicitly_wait(30)
-    
+
     def test_add_contact(self):
         wd = self.wd
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, Group_contact(firstname="IvanLLL", middlename="Ivanovich", lastname="Ivanov", nickname="IvAnOv", file_place="C:\\field_image_muholovka.jpg", title="employee",
-                            company="bank", address="Russia, Moscow, Green street 5", home="564585", mobile="89746521278", work="-", fax="-", email="test@test.ru",
-                            email2="-", email3="-", homepage="www.ivanov.ru", byear="1990", ayear="2000"))
+        self.add_contact_name(wd, Group_contact_name(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="IvAnOv"))
+        self.add_contact_file(wd, Group_contact_file(file_place="C:\\field_image_muholovka.jpg"))
+        self.add_contact_job_info(wd, Group_contact_job(title="employee", company="bank", address="Russia, Moscow, Green street 5"))
+        self.add_contact_telephone_info(wd, Group_contact_phone(home="564585", mobile="89746521278", work="-", fax="-"))
+        self.add_contact_mail_info(wd, Group_contact_email(email="test@test.ru", email2="-", email3="-"))
+        self.add_contact_homepage_info(wd, Group_contact_homepage(homepage="www.ivanov.ru"))
+        self.add_contact_date_form(wd, Group_contact_date(byear="1990", ayear="2000"))
         self.logout(wd)
 
-    # def test_add_empty_contact(self):
-    #     wd = self.wd
-    #     self.open_home_page(wd)
-    #     self.login(wd, username="admin", password="secret")
-    #     self.create_contact(wd, Group_contact(firstname="", middlename="", lastname="", nickname="", file_place="", title="",
-    #                         company="", address="", home="", mobile="", work="", fax="", email="",
-    #                         email2="", email3="", homepage="", byear="", ayear=""))
-    #     self.logout(wd)
+    def test_add_empty_contact(self):
+        wd = self.wd
+        self.open_home_page(wd)
+        self.login(wd, username="admin", password="secret")
+        self.add_contact_name(wd, Group_contact_name(firstname="", middlename="", lastname="", nickname=""))
+        self.add_contact_job_info(wd, Group_contact_job(title="", company="", address=""))
+        self.add_contact_telephone_info(wd, Group_contact_phone(home="", mobile="", work="", fax=""))
+        self.add_contact_mail_info(wd, Group_contact_email(email="", email2="", email3=""))
+        self.add_contact_homepage_info(wd, Group_contact_homepage(homepage=""))
+        self.add_contact_date_form(wd, Group_contact_date(byear="", ayear=""))
+        self.logout(wd)
 
     def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
-    def create_contact(self, wd, group_contact):
+    def add_contact_name(self, wd, group_contact):
         # open add contact
         wd.find_element_by_link_text("add new").click()
-        # fill contact form
+        # fill contact name form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(group_contact.firstname)
@@ -47,8 +54,14 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(group_contact.nickname)
+
+    def add_contact_file(self, wd, group_contact):
+        # choose contact photo
         wd.find_element_by_xpath("//div[@id='content']/form/input[@type='file']").send_keys(
             group_contact.file_place)
+
+    def add_contact_job_info(self, wd, group_contact):
+        # fill contact job info form
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys(group_contact.title)
@@ -58,6 +71,9 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
         wd.find_element_by_name("address").send_keys(group_contact.address)
+
+    def add_contact_telephone_info(self, wd, group_contact):
+        # fill contact telephone form
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
         wd.find_element_by_name("home").send_keys(group_contact.home)
@@ -70,6 +86,9 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("fax").click()
         wd.find_element_by_name("fax").clear()
         wd.find_element_by_name("fax").send_keys(group_contact.fax)
+
+    def add_contact_mail_info(self, wd, group_contact):
+        # fill contact mail form
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(group_contact.email)
@@ -79,9 +98,15 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("email3").click()
         wd.find_element_by_name("email3").clear()
         wd.find_element_by_name("email3").send_keys(group_contact.email3)
+
+    def add_contact_homepage_info(self, wd, group_contact):
+        # fill contact homepage form
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").clear()
         wd.find_element_by_name("homepage").send_keys(group_contact.homepage)
+
+    def add_contact_date_form(self, wd, group_contact):
+        # fill contact name form and submit
         wd.find_element_by_name("bday").click()
         wd.find_element_by_xpath("//option[@value='21']").click()
         wd.find_element_by_name("bmonth").click()
