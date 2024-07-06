@@ -22,7 +22,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys("Ivan")
+        wd.find_element_by_name("firstname").send_keys("IvanLLL")
         wd.find_element_by_name("middlename").click()
         wd.find_element_by_name("middlename").clear()
         wd.find_element_by_name("middlename").send_keys("Ivanovich")
@@ -32,9 +32,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys("IvAnOv")
-        # wd.find_element_by_name("photo").click()
-        # wd.find_element_by_name("photo").clear()
-        # wd.find_element_by_name("photo").send_keys("C:\\fakepath\\field_image_muholovka.jpg")
+        wd.find_element_by_xpath("//div[@id='content']/form/input[@type='file']").send_keys("C:\\field_image_muholovka.jpg")
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys("employee")
@@ -85,6 +83,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_xpath("//div[@id='content']/form/select[5]/option[18]").click()
         wd.find_element_by_xpath("//div[@id='content']/form/input[20]").click()
         wd.find_element_by_link_text("Logout").click()
+
     
     def is_element_present(self, how, what):
         try: self.wd.find_element(by=how, value=what)
