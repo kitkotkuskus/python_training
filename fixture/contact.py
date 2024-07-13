@@ -72,3 +72,13 @@ class ContactHelper:
         wd.find_element_by_name("ayear").send_keys(contact.ayear)
         # submit contact creation
         wd.find_element_by_name("submit").click()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        # select first contact
+        # wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_id("1").click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        # wd.switch_to.alert.accept()
