@@ -139,7 +139,7 @@ class ContactHelper:
         wd.find_element_by_name("ayear").click()
         wd.find_element_by_name("ayear").clear()
         wd.find_element_by_name("ayear").send_keys(contact.ayear)
-        # submit contact creation
+        # submit contact update
         wd.find_element_by_name("update").click()
 
     def delete_first_contact(self):
