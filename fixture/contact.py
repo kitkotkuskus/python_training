@@ -116,8 +116,9 @@ class ContactHelper:
                 firstname = element.find_element_by_css_selector("td:nth-child(3)").text
                 all_phones = cells[5].text
                 all_emails = cells[4].text
+                address = cells[3].text
                 self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  all_phones_from_home_page=all_phones, all_emails_from_home_page=all_emails))
+                                                  all_phones_from_home_page=all_phones, all_emails_from_home_page=all_emails, address=address))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -146,9 +147,10 @@ class ContactHelper:
         email = wd.find_element_by_name('email').get_attribute('value')
         email2 = wd.find_element_by_name('email2').get_attribute('value')
         email3 = wd.find_element_by_name('email3').get_attribute('value')
+        address = wd.find_element_by_name('address').text
         return Contact(firstname=firstname, lastname=lastname, id=id,
                        home=home, work=work, mobile=mobile, email=email,
-                       email2=email2, email3=email3)
+                       email2=email2, email3=email3, address=address)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
@@ -160,7 +162,8 @@ class ContactHelper:
         email = wd.find_element_by_css_selector("a:nth-child(15)").text
         email2 = wd.find_element_by_css_selector("a:nth-child(17)").text
         email3 = wd.find_element_by_css_selector("a:nth-child(19)").text
-        allnames = wd.find_element_by_css_selector("b:nth-child(1)").text.split()
-        print(allnames)
-        return Contact(home=home, work=work, mobile=mobile, email=email, email2=email2, email3=email3, firstname=allnames[0], lastname=allnames[2])
+        all_names = wd.find_element_by_css_selector("b:nth-child(1)").text.split()
+        all_info = wd.find_element_by_id('content').text.splitlines()
+        return Contact(home=home, work=work, mobile=mobile, email=email, email2=email2,
+                       email3=email3, firstname=all_names[0], lastname=all_names[2], address=all_info[5])
 
