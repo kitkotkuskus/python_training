@@ -6,11 +6,11 @@ import string
 
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " "*10
+    symbols = string.ascii_letters + string.digits
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 def random_number(maxlen):
-    symbols = string.digits + " "*5
+    symbols = string.digits
     return "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 def random_mail(prefix):
