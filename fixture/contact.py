@@ -159,11 +159,11 @@ class ContactHelper:
         home = re.search("H: (.*)", text).group(1)
         work = re.search("W: (.*)", text).group(1)
         mobile = re.search("M: (.*)", text).group(1)
-        email = wd.find_element_by_css_selector("a:nth-child(15)").text
-        email2 = wd.find_element_by_css_selector("a:nth-child(17)").text
-        email3 = wd.find_element_by_css_selector("a:nth-child(19)").text
+        emails = wd.find_elements_by_css_selector('a[href^="mailto:"]')
+        all_emails = [email.text for email in emails]
         all_names = wd.find_element_by_css_selector("b:nth-child(1)").text.split()
         all_info = wd.find_element_by_id('content').text.splitlines()
-        return Contact(home=home, work=work, mobile=mobile, email=email, email2=email2,
-                       email3=email3, firstname=all_names[0], lastname=all_names[2], address=all_info[5])
+        return Contact(home=home, work=work, mobile=mobile,
+                       all_emails=all_emails, firstname=all_names[0],
+                       lastname=all_names[2], address=all_info[5])
 
