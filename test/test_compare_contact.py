@@ -27,16 +27,20 @@ def clear(s):
     return re.sub("[- ()]", "", s)
 
 
+def clear_for_mail(s):
+    return re.sub("[ \n]", "", s)
+
+
 def merge_emails_on_view_page(contact):
     return "\n".join(filter(lambda x: x != "",
-                     map(lambda x: clear(x),
+                     map(lambda x: clear_for_mail(x),
                          filter(lambda x: x is not None,
                                  contact.all_emails))))
 
 
 def merge_emails_like_on_home_page(contact):
     return "\n".join(filter(lambda x: x != "",
-                     map(lambda x: clear(x),
+                     map(lambda x: clear_for_mail(x),
                          filter(lambda x: x is not None,
                                 [contact.email, contact.email2, contact.email3]))))
 
