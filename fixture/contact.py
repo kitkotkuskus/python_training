@@ -109,16 +109,22 @@ class ContactHelper:
             wd = self.app.wd
             self.open_home_page()
             self.contact_cache = []
+            # all_emails = wd.find_element_by_tag_name('td').find_elements_by_css_selector('a[href^="mailto:"]')
+            # print(all_emails)
+
             for element in wd.find_elements_by_css_selector("[name='entry']"):
                 cells = element.find_elements_by_tag_name('td')
                 id = element.find_element_by_css_selector("td.center").find_element_by_name("selected[]").get_attribute("value")
                 lastname = element.find_element_by_css_selector("td:nth-child(2)").text
                 firstname = element.find_element_by_css_selector("td:nth-child(3)").text
                 all_phones = cells[5].text
-                all_emails = cells[4].text
+                all_emails = cells[4].text.splitlines()
+                # emails = wd.find_elements_by_css_selector('td:nth-child(5)')
+                # all_emails = [email.text for email in emails].text.splitlines()
                 address = cells[3].text
                 self.contact_cache.append(Contact(lastname=lastname, firstname=firstname, id=id,
-                                                  all_phones_from_home_page=all_phones, all_emails_from_home_page=all_emails, address=address))
+                                                  all_phones_from_home_page=all_phones, all_emails=all_emails,
+                                                  address=address))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
