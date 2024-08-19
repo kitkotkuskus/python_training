@@ -50,6 +50,20 @@ class GroupHelper:
         self.return_to_groups_page()
         self.group_cache = None
 
+    def update_by_id(self, id, group):
+        wd = self.app.wd
+        self.open_groups_page()
+        # select group
+        self.select_group_by_id(id)
+        # init group edit
+        wd.find_element_by_name("edit").click()
+        # update group form
+        self.fill_group_form(group)
+        # submit group update
+        wd.find_element_by_name("update").click()
+        self.return_to_groups_page()
+        self.group_cache = None
+
     def delete_group_by_index(self, index):
         wd = self.app.wd
         self.open_groups_page()
@@ -91,6 +105,19 @@ class GroupHelper:
         wd = self.app.wd
         self.open_groups_page()
         self.select_group_by_index(index)
+        # open modification form
+        wd.find_element_by_name("edit").click()
+        # fill group form
+        self.fill_group_form(new_group_data)
+        # submit modification
+        wd.find_element_by_name("update").click()
+        self.return_to_groups_page()
+        self.group_cache = None
+
+    def modify_group_by_id(self, id, new_group_data):
+        wd = self.app.wd
+        self.open_groups_page()
+        self.select_group_by_id(id)
         # open modification form
         wd.find_element_by_name("edit").click()
         # fill group form
