@@ -29,20 +29,27 @@ class DbFixture:
         cursor = self.connection.cursor()
         try:
             cursor.execute("select id, firstname, middlename, lastname, nickname, company, title, address, home, mobile, work, fax, email, email2, email3, homepage, byear, ayear from addressbook")
-                           # bday, bmonth, aday, amonth,
-
             for row in cursor:
                 (id, firstname, middlename, lastname, nickname, company, title, address, home, mobile, work, fax, email, email2, email3, homepage, byear, ayear) = row
                 list.append(Contact(id=str(id), firstname=firstname, middlename=middlename,
                                     lastname=lastname, nickname=nickname, company=company,
                                     title=title, address=address, home=home, mobile=mobile,
                                     work=work, fax=fax, email=email, email2=email2, email3=email3,
-                                    homepage=homepage,
-                                    #bday=bday, bmonth=bmonth,
-                                    byear=byear,
-                                    # #aday=aday, amonth=amonth,
-                                    ayear=ayear
-                                    ))
+                                    homepage=homepage, byear=byear, ayear=ayear))
+        finally:
+            cursor.close()
+        return list
+
+    def get_all_contact_list(self):
+        list = []
+        cursor = self.connection.cursor()
+        try:
+            cursor.execute("select id, lastname, firstname, address, email, email2, email3, home, mobile, work from addressbook")
+            for row in cursor:
+                (id, lastname, firstname, address, email, email2, email3, home, mobile, work) = row
+                list.append(Contact(id=str(id), lastname=lastname, firstname=firstname,
+                                    address=address, email=email, email2=email2, email3=email3,
+                                    home=home, mobile=mobile, work=work))
         finally:
             cursor.close()
         return list
