@@ -40,6 +40,9 @@ class DbFixture:
             cursor.close()
         return list
 
+    # where
+    # deprecated = '0000-00-00 00:00:00
+
     def get_all_contact_list(self):
         list = []
         cursor = self.connection.cursor()

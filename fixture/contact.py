@@ -192,3 +192,18 @@ class ContactHelper:
                        all_emails=all_emails, firstname=all_names[0],
                        lastname=all_names[2], address=all_info[5])
 
+    def add_to_group(self, id, group_id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        wd.find_element_by_name("to_group").find_element_by_css_selector("option[value='%s']" % group_id).click()
+        wd.find_element_by_xpath("//input[@value='Add to']").click()
+        self.contact_cache = None
+
+    def del_from_group(self, id, group_id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_name("group").find_element_by_css_selector("option[value='%s']" % group_id).click()
+        self.select_contact_by_id(id) #нужно передавать те контакты, которые есть в выбранной группе
+        wd.find_element_by_name("remove").click()
+        self.contact_cache = None

@@ -5,6 +5,7 @@ import importlib
 import jsonpickle
 from python_training.fixture.application import Application
 from python_training.fixture.db import DbFixture
+from python_training.fixture.orm import ORMFixture
 
 
 
@@ -40,6 +41,11 @@ def db(request):
         dbfixture.destroy()
     request.addfinalizer(fin)
     return dbfixture
+
+@pytest.fixture(scope="session")
+def orm():
+    ormfixture = ORMFixture(host='127.0.0.1', name='addressbook', user='root', password='')
+    return ormfixture
 
 
 @pytest.fixture
