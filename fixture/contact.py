@@ -204,6 +204,6 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         wd.find_element_by_name("group").find_element_by_css_selector("option[value='%s']" % group_id).click()
-        self.select_contact_by_id(id) #нужно передавать те контакты, которые есть в выбранной группе
+        self.select_contact_by_id(id)
         wd.find_element_by_name("remove").click()
         self.contact_cache = None
