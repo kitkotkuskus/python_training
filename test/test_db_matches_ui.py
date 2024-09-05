@@ -1,5 +1,5 @@
-from python_training.model.group import Group
-from python_training.model.contact import Contact
+from model.group import Group
+from model.contact import Contact
 from timeit import timeit
 
 

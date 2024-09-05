@@ -1,4 +1,4 @@
-from python_training.model.contact import Contact
+from model.contact import Contact
 import random
 
 

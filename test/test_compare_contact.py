@@ -1,5 +1,5 @@
 import re
-from python_training.model.contact import Contact
+from model.contact import Contact
 
 
 def test_compare_fields_on_home_page(app, db):

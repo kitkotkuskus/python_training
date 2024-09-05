@@ -1,7 +1,7 @@
 from pony.orm import *
 from datetime import datetime
-from python_training.model.group import Group
-from python_training.model.contact import Contact
+from model.group import Group
+from model.contact import Contact
 from pymysql.converters import decoders
 
 

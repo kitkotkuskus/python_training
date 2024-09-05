@@ -1,6 +1,6 @@
 import random
-from python_training.model.contact import Contact
-from python_training.model.group import Group
+from model.contact import Contact
+from model.group import Group
 
 
 def test_del_contact_from_group(app, db, orm):
