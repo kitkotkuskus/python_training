@@ -1,6 +1,6 @@
 from pony.orm import *
 from datetime import datetime
-from model.group import Group
+from python_training.model.group import Group
 from python_training.model.contact import Contact
 from pymysql.converters import decoders
 

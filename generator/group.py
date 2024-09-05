@@ -1,4 +1,4 @@
-from model.group import Group
+from python_training.model.group import Group
 import random
 import string
 import os.path

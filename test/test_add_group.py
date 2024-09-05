@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from model.group import Group
+from python_training.model.group import Group
 
 
 def test_add_group(app, db, json_groups, check_ui):

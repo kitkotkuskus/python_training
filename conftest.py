@@ -3,9 +3,9 @@ import json
 import os.path
 import importlib
 import jsonpickle
-from fixture.application import Application
-from fixture.db import DbFixture
-from fixture.orm import ORMFixture
+from python_training.fixture.application import Application
+from python_training.fixture.db import DbFixture
+from python_training.fixture.orm import ORMFixture
 
 
 
