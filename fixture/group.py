@@ -1,4 +1,5 @@
-from python_training.model.group import Group
+from model.group import Group
+
 
 class GroupHelper:
 
