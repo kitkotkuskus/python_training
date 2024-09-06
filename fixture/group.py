@@ -1,4 +1,5 @@
 from model.group import Group
+import jsonpickle
 
 
 class GroupHelper:

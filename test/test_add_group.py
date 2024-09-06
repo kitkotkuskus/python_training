@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 from model.group import Group
+import jsonpickle
 
 
 def test_add_group(app, db, json_groups, check_ui):
-    group = json_groups
+    if 'py/object' in json_groups:
+        del json_groups['py/object']
+    group = Group(**json_groups)
+    # group = json_groups
     old_groups = db.get_group_list()
     app.group.create(group)
     new_groups = db.get_group_list()
